@@ -1,4 +1,4 @@
-#error = 1.45125057217
+#with error: 2.01615916134
 
 import numpy as np
 import pandas as pd
@@ -30,35 +30,38 @@ df['sex']=le.transform(df['sex'])
     #df[i]=df[i].shift(-col)
 forcast_col='length'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0.1*len(df)))
+forcast_out=int(math.floor(0.01*len(df)))
 df['lenght2']=df[forcast_col].shift(-forcast_out)
 
 forcast_col='diameter'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0.1*len(df)))
+forcast_out=int(math.floor(0.001*len(df)))
 df['diameter2']=df[forcast_col].shift(-forcast_out)
 
 forcast_col='height'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0.1*len(df)))
+forcast_out=int(math.floor(0.01*len(df)))
 df['height2']=df[forcast_col].shift(-forcast_out)
 
+#no change
 forcast_col='whole-weight'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0.01*len(df)))
+forcast_out=int(math.floor(0*len(df)))
 df['whole-weight2']=df[forcast_col].shift(-forcast_out)
 
+#no change
 forcast_col='shucked-weight'
 df.fillna(-99999,inplace=True)
 forcast_out=int(math.ceil(0*len(df)))
 df['shucked-weight2']=df[forcast_col].shift(-forcast_out)
 
+#no change
 forcast_col='viscera-weight'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0.1*len(df)))
+forcast_out=int(math.floor(0.000001*len(df)))
 df['viscera-weight2']=df[forcast_col].shift(-forcast_out)
 
-
+#no change
 forcast_col='shell-weight'
 df.fillna(-99999,inplace=True)
 forcast_out=int(math.floor(0*len(df)))
@@ -68,7 +71,7 @@ X=df.iloc[:,[0,9,10,11,12,13,14,15]]
 Y=df.iloc[:,8]
 
 
-x_train,x_test,y_train,y_test=train_test_split(np.nan_to_num(X),np.nan_to_num(Y),test_size=0.01,random_state=200)
+x_train,x_test,y_train,y_test=train_test_split(X,Y,test_size=0.33,random_state=200)
 params = {'n_estimators': 500, 'max_depth': 4, 'min_samples_split': 2,
         'learning_rate': 0.01, 'loss': 'ls'}
 #dt = DecisionTreeRegressor()

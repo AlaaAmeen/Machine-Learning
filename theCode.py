@@ -1,4 +1,4 @@
-#with error: 2.01615916134
+#with error: 1.97585143438
 
 import numpy as np
 import pandas as pd
@@ -8,9 +8,9 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import mean_squared_error
 from sklearn.cross_validation import train_test_split
 #from sklearn import linear_model
-from sklearn.ensemble import GradientBoostingRegressor
+#from sklearn.ensemble import GradientBoostingRegressor
 #from sklearn.tree import DecisionTreeRegressor
-#from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor
 #from sklearn.datasets import load_boston
 
 
@@ -30,12 +30,12 @@ df['sex']=le.transform(df['sex'])
     #df[i]=df[i].shift(-col)
 forcast_col='length'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0.01*len(df)))
+forcast_out=int(math.floor(0.001*len(df)))
 df['lenght2']=df[forcast_col].shift(-forcast_out)
 
 forcast_col='diameter'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0.001*len(df)))
+forcast_out=int(math.floor(0*len(df)))
 df['diameter2']=df[forcast_col].shift(-forcast_out)
 
 forcast_col='height'
@@ -75,13 +75,13 @@ x_train,x_test,y_train,y_test=train_test_split(X,Y,test_size=0.33,random_state=2
 params = {'n_estimators': 500, 'max_depth': 4, 'min_samples_split': 2,
         'learning_rate': 0.01, 'loss': 'ls'}
 #dt = DecisionTreeRegressor()
-#dt = RandomForestRegressor(n_estimators=150, min_samples_split=2)
+dt = RandomForestRegressor(n_estimators=300, min_samples_split=30)
 #linReg=LinearRegression()
 #model = linear_model.LinearRegression(fit_intercept=True, normalize=True, copy_X=True)
-linReg = GradientBoostingRegressor(**params)
+#linReg = GradientBoostingRegressor(**params)
 
-linReg.fit(x_train,y_train)
+dt.fit(x_train,y_train)
 
-result=linReg.predict(x_test)
+result=dt.predict(x_test)
 error=np.sqrt(mean_squared_error(y_test,result))
 print(error)

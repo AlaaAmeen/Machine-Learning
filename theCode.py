@@ -1,4 +1,4 @@
-#with error: 1.97585143438
+#with error: 1.9576288203
 
 import numpy as np
 import pandas as pd
@@ -40,13 +40,13 @@ df['diameter2']=df[forcast_col].shift(-forcast_out)
 
 forcast_col='height'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0.01*len(df)))
+forcast_out=int(math.ceil(0.01*len(df)))
 df['height2']=df[forcast_col].shift(-forcast_out)
 
 #no change
 forcast_col='whole-weight'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0*len(df)))
+forcast_out=int(math.ceil(0*len(df)))
 df['whole-weight2']=df[forcast_col].shift(-forcast_out)
 
 #no change
@@ -58,13 +58,13 @@ df['shucked-weight2']=df[forcast_col].shift(-forcast_out)
 #no change
 forcast_col='viscera-weight'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0.000001*len(df)))
+forcast_out=int(math.ceil(0.000001*len(df)))
 df['viscera-weight2']=df[forcast_col].shift(-forcast_out)
 
 #no change
 forcast_col='shell-weight'
 df.fillna(-99999,inplace=True)
-forcast_out=int(math.floor(0*len(df)))
+forcast_out=int(math.ceil(0*len(df)))
 df['shell-weight2']=df[forcast_col].shift(-forcast_out)
 
 X=df.iloc[:,[0,9,10,11,12,13,14,15]]
@@ -75,7 +75,7 @@ x_train,x_test,y_train,y_test=train_test_split(X,Y,test_size=0.33,random_state=2
 params = {'n_estimators': 500, 'max_depth': 4, 'min_samples_split': 2,
         'learning_rate': 0.01, 'loss': 'ls'}
 #dt = DecisionTreeRegressor()
-dt = RandomForestRegressor(n_estimators=300, min_samples_split=30)
+dt = RandomForestRegressor(n_estimators=350, min_samples_split=30)
 #linReg=LinearRegression()
 #model = linear_model.LinearRegression(fit_intercept=True, normalize=True, copy_X=True)
 #linReg = GradientBoostingRegressor(**params)

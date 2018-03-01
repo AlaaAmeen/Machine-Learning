@@ -72,7 +72,7 @@ Y=df.iloc[:,8]
 
 
 x_train,x_test,y_train,y_test=train_test_split(X,Y,test_size=0.33,random_state=200)
-params = {'n_estimators': 500, 'max_depth': 4, 'min_samples_split': 2,
+#params = {'n_estimators': 500, 'max_depth': 4, 'min_samples_split': 2,
         'learning_rate': 0.01, 'loss': 'ls'}
 #dt = DecisionTreeRegressor()
 dt = RandomForestRegressor(n_estimators=350, min_samples_split=30)

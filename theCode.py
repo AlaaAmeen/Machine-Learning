@@ -15,7 +15,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 
 #boston = load_boston()
-
+#after adding columns name
 df=pd.read_csv("abalone.data",sep=",")
 #df=pd.read_csv("abalone.data",sep=",",index_col=0)
 le=LabelEncoder()
